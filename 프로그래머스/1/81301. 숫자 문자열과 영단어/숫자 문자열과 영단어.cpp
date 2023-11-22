@@ -1,29 +1,27 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
-
 int solution(string s) {
 	int n = s.size();
 	int answer = 0;
 	string str = "";
 	map<string, int> m;
-	m["zero"] = 1;
-	m["one"] = 2;
-	m["two"] = 3;
-	m["three"] = 4;
-	m["four"] = 5;
-	m["five"] = 6;
-	m["six"] = 7;
-	m["seven"] = 8;
-	m["eight"] = 9;
-	m["nine"] = 10;
+	m["zero"] = 0;
+	m["one"] = 1;
+	m["two"] = 2;
+	m["three"] = 3;
+	m["four"] = 4;
+	m["five"] = 5;
+	m["six"] = 6;
+	m["seven"] = 7;
+	m["eight"] = 8;
+	m["nine"] = 9;
 	int i = 0;
 	while (s != "") {
 		if (m[str] > 0) {
 			s.erase(s.find(str), str.size());
 			answer *= 10;
-			answer += m[str]-1;
+			answer += m[str];
 			str = "";
 			i = 0;
 			continue;
