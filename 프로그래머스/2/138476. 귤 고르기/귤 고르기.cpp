@@ -4,8 +4,6 @@
 #include <map>
 using namespace std;
 
-map<int, int> m;
-
 int solution(int k, vector<int> tangerine) {
 	int answer = 0;
 	map<int, int> m;
