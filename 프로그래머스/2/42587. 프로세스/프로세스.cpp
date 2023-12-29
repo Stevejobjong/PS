@@ -3,14 +3,17 @@ using namespace std;
 
 int solution(vector<int> priorities, int location) {
     deque<pair<int,int>> q;
+	int order = 1;
+    
 	for (int i = 0; i < priorities.size(); i++) {
 		q.push_back({ i,priorities[i] });
 	}
-	int order = 1;
+    
 	while (true) {
 		pair<int, int> f = q.front();
 		q.pop_front();
 		bool isProcessing = true;
+        
 		for (auto node : q)
 		{
 			if (node.second > f.second)
@@ -20,13 +23,14 @@ int solution(vector<int> priorities, int location) {
                 break;
 			}
 		}
+        
 		if (isProcessing) {
 			if (f.first == location)
 				return order;
 			else
 				order++;
 		}
-
 	}
+    
     return order;
 }
