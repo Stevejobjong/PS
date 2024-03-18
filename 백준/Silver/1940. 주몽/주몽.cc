@@ -9,11 +9,11 @@ int main(void)
 	int ans = 0;
 	int N;
 	int M;
+	int num;
 	cin >> N;
 	cin >> M;
 	for (int i = 0; i < N; i++)
 	{
-		int num;
 		cin >> num;
 
 		if (num == M / 2 && !(M & 1))
