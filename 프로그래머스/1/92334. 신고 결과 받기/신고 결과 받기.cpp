@@ -1,4 +1,43 @@
 #include <bits/stdc++.h>
+using namespace std;
+vector<string> split(string input, string delimeter)
+{
+	vector<string> ret;
+	long long pos = 0;
+	while ((pos = input.find(delimeter)) != string::npos)
+	{
+		ret.push_back(input.substr(0, pos));
+		input.erase(0, pos + delimeter.length());
+	}
+	ret.push_back(input);
+	return ret;
+}
+vector<int> solution(vector<string> id_list, vector<string> report, int k)
+{
+	vector<int> ans;
+	map<string, int> m;
+	map<string, set<string>> r;	//key:신고당한사람, value:신고한사람 목록
+	for (auto i : report)
+	{
+		vector<string> v = split(i," ");
+		r[v[1]].insert(v[0]);
+	}
+	for (auto i : r)
+	{
+		if (i.second.size() >= k)
+		{
+			for (auto j : i.second)
+				m[j]++;
+		}
+	}
+	for (auto i : id_list)
+	{
+		ans.push_back(m[i]);
+	}
+
+	return ans;
+}
+/*#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -34,4 +73,4 @@ vector<int> solution(vector<string> id_list, vector<string> report, int k) {
         answer.push_back(repCnt[id_list[i]]);
     }
 	return answer;
-}
+}*/
