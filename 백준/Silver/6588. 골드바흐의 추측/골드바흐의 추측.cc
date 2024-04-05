@@ -1,40 +1,32 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
-int num[1000001];
-int main(void) {
-	int number;
+
+int prime[1000001];
+int main(void)
+{
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
-	int num1=0, num2=0;
-	for (int i = 2; i <= 1000000; i++) {
-		num[i] = i;
-	}
-	for (int i = 2; i <= sqrt(1000000); i++) {
-		if (num[i] == 0)
+	for (int i = 2; i < sqrt(1000000); i++) {
+		if (prime[i])
 			continue;
-		for (int j = i * 2; j <= 1000000; j = j + i) {
-			num[j] = 0;
+		for (int j = 2; j * i <= 1000000; j++) {
+			prime[j * i] = 1;
 		}
 	}
-	while (true) {
-		cin >> number;
-		if (number == 0)
+	while (1) {
+		int n;
+		cin >> n;
+		if (!n)
 			return 0;
-		
-		for (int i = 2; i < number; i++) {
-			if (num[i])
-			{
-				if (num[number - i])
-				{
-					num1 = i;
-					num2 = number - i;
-					break;
-				}
-			}
 
+		for (int i = 2; i <= n; i++) {
+			if (!prime[i] && !prime[n - i])
+			{
+				cout << n << " = " << i << " + " << n - i;
+				cout << '\n';
+				break;
+			}
 		}
-		cout << number << " = " << num1 << " + " << num2<<'\n';
 	}
 	return 0;
 }
