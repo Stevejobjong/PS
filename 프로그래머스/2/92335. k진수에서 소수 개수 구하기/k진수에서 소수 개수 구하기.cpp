@@ -1,40 +1,42 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-bool IsPrime(long long number) {
-	if (number < 2)
+bool IsPrime(long long num) {
+	if (num < 2)
 		return false;
-	for (int i = 2; i <= sqrt(number); i++) {
-		if (number % i == 0)
+	for (int i = 2; i <= sqrt(num); i++) 
+	{
+		if (num % i == 0)
 			return false;
 	}
 	return true;
 }
+
 int solution(int n, int k) {
 	int answer = 0;
-	string num = "";
-	string tmp = "";
-    while(n > 0) {
-        num += to_string(n % k);
-        n /= k;
-    }
-    reverse(num.begin(), num.end());
-    
-	for (int i = 0; i < num.size(); i++) {
-		if (num[i] == '0' && !tmp.empty()) {
-			if (IsPrime(stoll(tmp)))
-				answer++;
-			tmp = "";
+	string str;
+	while (n > 0)
+	{
+		str += to_string(n % k);
+		n /= k;
+	}
+	reverse(str.begin(), str.end());
+	long long num = 0;
+	for (int i = 0; i < str.size(); i++) 
+	{
+		if (str[i] != '0')
+		{
+			num *= 10;
+			num += str[i] - '0';
 		}
-		else {
-			tmp += num[i];
+		else
+		{
+			if (IsPrime(num))
+				answer++;
+			num = 0;
 		}
 	}
-    if(!tmp.empty()) {
-        if(IsPrime(stoll(tmp)))
-            answer++;
-    }
-
+	if (IsPrime(num))
+		answer++;
 	return answer;
 }
