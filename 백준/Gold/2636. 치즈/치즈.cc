@@ -5,17 +5,6 @@ int board[101][101];
 int visited[101][101];
 int dx[4] = { 0,0,-1,1 };
 int dy[4] = { 1,-1,0,0 };
-int CheeseCount(int h, int w)
-{
-	int ret = 0;
-	for (int i = 0; i < h; i++) {
-		for (int j = 0; j < w; j++) {
-			if (board[i][j] == 1)
-				ret++;
-		}
-	}
-	return ret;
-}
 int main(void)
 {
 	cin.tie(NULL);
@@ -29,9 +18,11 @@ int main(void)
 		for (int j = 0; j < W; j++) 
 		{
 			cin >> board[i][j];
+			if (board[i][j] == 1)
+				cnt++;
 		}
 	}
-	while ((cnt=CheeseCount(H, W))!=0) 
+	while (cnt) 
 	{
 		s.push(cnt);
 		queue<pair<int, int>> q;
@@ -57,33 +48,17 @@ int main(void)
 					continue;
 				if (ny < 0 || ny >= H)
 					continue;
-				if (visited[ny][nx] || board[ny][nx] == 1)
+				if (visited[ny][nx])
 					continue;
-				q.push({ ny,nx });
-				visited[ny][nx] = 1;
-			}
-		}
-
-		for (int i = 0; i < H; i++)
-		{
-			for (int j = 0; j < W; j++)
-			{
-				if (board[i][j] == 1)
+				if (board[ny][nx] == 1)
 				{
-					for (int k = 0; k < 4; k++) {
-						int ny = i + dy[k];
-						int nx = j + dx[k];
-						if (nx < 0 || nx >= W)
-							continue;
-						if (ny < 0 || ny >= H)
-							continue;
-						if (visited[ny][nx])
-						{
-							board[i][j] = 0;
-							break;
-						}
-					}
+					board[ny][nx] = 0;
+					cnt--;
 				}
+				else
+					q.push({ ny,nx });
+
+				visited[ny][nx] = 1;
 			}
 		}
 	}
