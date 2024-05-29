@@ -1,20 +1,18 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-vector<long long> a;
+long long a[10001];
 int main(void)
 {
 	cin.tie(NULL);
 	ios::sync_with_stdio(false);
-	long long K, N;
+	int K, N;
 	long long sum = 0;
 	vector<long long> v;
 	cin >> K >> N;
 	for (int i = 0; i < K; i++)
 	{
-		long long t;
-		cin >> t;
-		a.push_back(t);
+		cin >> a[i];
 		sum += a[i];
 	}
 	long long left = 1;
